@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    internal class Program
+    {
+
+        static string BotNumberFormatter(Int64 bots)
+        {
+            double botNum = bots;
+            string formattedBots = "0";
+
+            if (bots < 1000)
+            {
+                formattedBots = bots.ToString();
+            }
+            else if (bots < 1000000)
+            {
+                botNum /= 1000;
+                botNum = Math.Round(botNum, 2);
+                formattedBots = botNum.ToString() + "K";
+            }
+            else if (bots < 1000000000)
+            {
+                botNum /= 1000000;
+                botNum = Math.Round(botNum, 2);
+                formattedBots = botNum.ToString() + "M";
+            }
+            else if (bots < 1000000000000)
+            {
+                botNum /= 1000000000;
+                botNum = Math.Round(botNum, 2);
+                formattedBots = botNum.ToString() + "B";
+            }
+            else if (bots < 1000000000000000)
+            {
+                botNum /= 1000000000000;
+                botNum = Math.Round(botNum, 2);
+                if (botNum >= 1000)
+                {
+                    formattedBots = "999.99T";
+                }
+                else
+                {
+                    formattedBots = botNum.ToString() + "T";
+                }
+            }
+            else
+            {
+                formattedBots = "Too many bots, please enter a lower number";
+            }
+
+
+
+            return formattedBots;
+        }
+
+        static void Main()
+        {
+            Int64 bots = 1;
+
+            while (bots > 0)
+            {
+                Console.WriteLine("Enter the number of bots: ");
+                bots = Convert.ToInt64(Console.ReadLine());
+                Console.WriteLine(BotNumberFormatter(bots));
+            }
+        }
+    }
+}
